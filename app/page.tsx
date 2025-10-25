@@ -1,8 +1,41 @@
 "use client";
 
-import { Linkedin, Mail, Github, Twitter, Award, Users, Target, Zap } from "lucide-react";
+import { Linkedin, Mail, Github, Twitter, Award, Users, Target, Zap, ArrowUpRight } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
+
+// ============================================================================
+// WORK HISTORY DATA - Edit this section to add or update your work experience
+// ============================================================================
+// To add a new job:
+// 1. Copy an existing entry
+// 2. Update the id to be unique (increment the number)
+// 3. Fill in all fields with your job details
+// 4. Add as many positions and technologies as needed
+// ============================================================================
+const workHistory = [
+  {
+    id: 1, // Unique identifier for this job
+    dateRange: "2024 — PRESENT", // Date range (use em dash: —)
+    jobTitle: "Senior Frontend Engineer, Accessibility", // Your job title
+    company: "Klaviyo", // Company name
+    companyUrl: "https://www.klaviyo.com", // Company website URL
+    positions: ["Senior Engineer", "Engineer"], // Sub-positions (optional, can be empty array [])
+    description: "Build and maintain critical components used to construct Klaviyo's frontend, across the whole product. Work closely with cross-functional teams, including developers, designers, and product managers, to implement and advocate for best practices in web accessibility.",
+    technologies: ["JavaScript", "TypeScript", "React", "Storybook"] // Tech stack used
+  },
+  {
+    id: 2,
+    dateRange: "2018 — 2024",
+    jobTitle: "Lead Engineer",
+    company: "Upstatement",
+    companyUrl: "https://www.upstatement.com",
+    positions: ["Senior Engineer", "Engineer"],
+    description: "Build, style, and ship high-quality websites, design systems, mobile apps, and digital experiences for a diverse array of projects for clients including Harvard Business School, Everytown for Gun Safety, Pratt Institute, Koala Health, Vanderbilt University, The 19th News, and more. Provide leadership within engineering department through close collaboration, knowledge shares, and spearheading the development of internal tools.",
+    technologies: ["JavaScript", "TypeScript", "HTML & SCSS", "React", "Next.js", "React Native", "WordPress", "Contentful", "Node.js", "PHP"]
+  }
+  // Add more jobs here by copying the structure above
+];
 
 export default function Home() {
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
@@ -257,6 +290,73 @@ export default function Home() {
                         <p className="text-slate-300 text-sm leading-relaxed">
                           {achievement.description}
                         </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Work History Section */}
+            <div className="bg-slate-800/40 backdrop-blur-xl border-2 border-cyan-400/30 rounded-2xl p-8 shadow-2xl shadow-cyan-500/10">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-2 h-8 bg-gradient-to-b from-cyan-400 to-purple-600 rounded-full"></div>
+                <h3 className="text-4xl font-bold text-cyan-400">Work History</h3>
+              </div>
+              
+              <div className="space-y-12">
+                {workHistory.map((job) => (
+                  <div key={job.id} className="group">
+                    <div className="grid grid-cols-[180px_1fr] gap-6">
+                      {/* Left Column - Date Range */}
+                      <div className="text-sm font-semibold text-slate-400 uppercase tracking-wider pt-1">
+                        {job.dateRange}
+                      </div>
+                      
+                      {/* Right Column - Job Details */}
+                      <div className="space-y-4">
+                        {/* Job Title & Company */}
+                        <div>
+                          <a 
+                            href={job.companyUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 group/link"
+                          >
+                            <h4 className="text-xl font-bold text-slate-100 group-hover/link:text-cyan-300 transition-colors">
+                              {job.jobTitle} · {job.company}
+                            </h4>
+                            <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover/link:text-cyan-300 group-hover/link:-translate-y-1 group-hover/link:translate-x-1 transition-transform" />
+                          </a>
+                          
+                          {/* Position Subtitles */}
+                          {job.positions && job.positions.length > 0 && (
+                            <div className="mt-2 space-y-1">
+                              {job.positions.map((position, idx) => (
+                                <p key={idx} className="text-sm text-slate-400">
+                                  {position}
+                                </p>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                        
+                        {/* Description */}
+                        <p className="text-slate-300 leading-relaxed text-sm">
+                          {job.description}
+                        </p>
+                        
+                        {/* Technology Tags */}
+                        <div className="flex flex-wrap gap-2">
+                          {job.technologies.map((tech, idx) => (
+                            <span 
+                              key={idx}
+                              className="px-4 py-2 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 text-xs font-medium rounded-full border border-cyan-400/30 hover:border-cyan-400/60 transition-all duration-200 cursor-default"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
